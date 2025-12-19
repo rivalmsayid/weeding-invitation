@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wedding Invitation</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family: Georgia, serif;
+  background:#000;
+}
+
+/* HERO */
+.hero{
+  width:100%;
+  height:100vh;
+
+  background:
+    /* GRADASI — TINGGINYA DIBATASI */
+    url('gradient.png') bottom / 100% 90% no-repeat,
+
+    /* FOTO */
+    url('cover.jpg') center / cover no-repeat;
+}
+
+/* KONTEN */
+.content{
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  text-align:center;
+  color:#fff;
+  padding:0 20px;
+}
+
+/* TEKS */
+.content small{
+  letter-spacing:2px;
+  opacity:.8;
+}
+
+.content h1{
+  font-size:clamp(32px,4vw,48px);
+  margin:12px 0;
+}
+
+.content p{
+  margin-bottom:24px;
+}
+
+/* BUTTON */
+.btn{
+  background:#fff;
+  color:#000;
+  padding:12px 28px;
+  border-radius:30px;
+  text-decoration:none;
+  font-size:14px;
+
+  display:inline-flex;          /* ⬅️ KUNCI */
+  align-items:center;
+  gap:10px;                     /* jarak icon & teks */
+}
+
+
+/* MOBILE: TURUN DIKIT */
+@media (max-width:768px){
+  .content{
+    justify-content:flex-end;
+    padding-bottom:15vh;
+  }
+
+  @keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* SEMUA ITEM AWALNYA INVISIBLE */
+.content > * {
+  opacity: 0;
+  animation: fadeUp 1s ease forwards;
+}
+
+/* URUTAN MUNCUL */
+.content small {
+  animation-delay: .3s;
+}
+
+.content h1 {
+  animation-delay: .6s;
+}
+
+.content p {
+  animation-delay: .9s;
+}
+
+.content .btn {
+  animation-delay: 1.2s;
+}
+
+
+}
+
+</style>
+</head>
+
+<body>
+
+<section class="hero">
+  <div class="content">
+    <small>THE WEDDING OF</small>
+    <h1>Latifah & Erfin</h1>
+    <p>Dear,<br><br>Acaraya Adibrata</p>
+    <a href="#undangan" class="btn" id="openInvite">
+    <i class="fa-regular fa-envelope-open"></i>
+    <span>Buka Undangan</span>
+    </a>
+
+  </div>
+</section>
+
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  const btn = document.getElementById('openInvite');
+  const music = document.getElementById('bgMusic');
+
+  btn.addEventListener('click', function(e){
+    e.preventDefault(); // tahan pindah halaman dulu
+    music.play();
+
+    // OPTIONAL: lanjut scroll / pindah halaman
+    setTimeout(() => {
+      window.location.href = '#undangan';
+    }, 300);
+  });
+</script>
+
+
+</body>
+</html>

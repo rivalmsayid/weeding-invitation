@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wedding Invitation</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family: Georgia, serif;
+  background:#000;
+  overflow:hidden;
+}
+
+/* ================= HALAMAN 1 (JANGAN DIUBAH) ================= */
+.hero{
+  position:fixed;
+  inset:0;
+  z-index:10;
+  background:
+    url('gradient.png') bottom / 100% 90% no-repeat,
+    url('cover.jpg') center / cover no-repeat;
+  transition:opacity .8s ease;
+}
+
+.content{
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:#fff;
+  padding:0 20px;
+}
+
+.content small{letter-spacing:2px; opacity:.8;}
+.content h1{font-size:clamp(32px,4vw,48px); margin:12px 0;}
+.content p{margin-bottom:24px;}
+
+.btn{
+  background:#fff;
+  color:#000;
+  padding:12px 28px;
+  border-radius:30px;
+  text-decoration:none;
+  font-size:14px;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+}
+
+@keyframes fadeUp{
+  from{opacity:0; transform:translateY(16px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+.content > *{
+  opacity:0;
+  animation:fadeUp 1s ease forwards;
+}
+.content small{animation-delay:.3s;}
+.content h1{animation-delay:.6s;}
+.content p{animation-delay:.9s;}
+.content .btn{animation-delay:1.2s;}
+
+@media(max-width:768px){
+  .content{
+    justify-content:flex-end;
+    padding-bottom:15vh;
+  }
+}
+
+/* ================= HALAMAN 2 ================= */
+.invitation{
+  position:fixed;
+  inset:0;
+  z-index:1;
+  background:#000;
+  color:#fff;
+  opacity:0;
+  visibility:hidden;
+  transition:opacity .8s ease;
+  overflow:hidden;
+}
+
+.invitation.show{
+  opacity:1;
+  visibility:visible;
+}
+
+/* FOTO */
+.bg-photo{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center top;
+  z-index:0;
+  opacity:0;
+  animation:fadeScale 1.2s ease forwards;
+  animation-delay:.4s;
+}
+
+/* ================= SNOW ================= */
+.snow-wrap{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:55vh;
+  z-index:2;
+  pointer-events:none;
+  overflow:hidden;
+}
+
+.snow{
+  position:absolute;
+  top:-40px;
+  width:26px;               /* sedikit lebih besar */
+  height:26px;
+  background:url('/snow-2.png') center / contain no-repeat;
+
+  opacity:1;
+  mix-blend-mode:screen;   /* ❗ bikin snow nyala di atas foto gelap */
+  filter:
+    brightness(1.3)
+    contrast(1.2)
+    drop-shadow(0 0 6px rgba(255,255,255,.9))
+    drop-shadow(0 0 14px rgba(255,255,255,.7));
+
+  animation:snowFall linear infinite;
+}
+
+@keyframes snowFall{
+  from{
+    transform:translate(0,0);
+  }
+  to{
+    transform:translate(30px,55vh);
+  }
+}
+
+
+/* GRADIENT */
+.gradient{
+  position:absolute;
+  inset:0;
+  z-index:3;
+  background:linear-gradient(
+    to top,
+    rgba(0,0,0,.85) 0%,
+    rgba(0,0,0,.6) 40%,
+    rgba(0,0,0,0) 70%
+  );
+}
+
+/* BORDER */
+.border-bottom{
+  position:absolute;
+  bottom:-2px;
+  left:0;
+  width:100%;
+  z-index:4;
+  pointer-events:none;
+}
+
+.border-bottom img{
+  width:100%;
+  display:block;
+}
+
+/* TEXT */
+.content-box{
+  position:absolute;
+  bottom:90px;
+  left:24px;
+  right:24px;
+  z-index:6;
+}
+
+.content-box small,
+.content-box h1,
+.content-box p,
+.content-box .date,
+.content-box .btn-save{
+  opacity:0;
+  animation:slideUp 1s ease forwards;
+}
+
+.content-box small{animation-delay:.8s;}
+.content-box h1{animation-delay:1s;}
+.content-box p{animation-delay:1.2s;}
+.content-box .date{animation-delay:1.35s;}
+.content-box .btn-save{animation-delay:1.5s;}
+
+.content-box small{
+  letter-spacing:2px;
+  font-size:12px;
+  opacity:.8;
+}
+
+.content-box h1{
+  font-size:32px;
+  margin:10px 0;
+}
+
+.content-box p{
+  font-size:14px;
+}
+
+.date{
+  margin:14px 0 20px;
+  font-size:13px;
+}
+
+.btn-save{
+  display:inline-block;
+  background:#f5efe6;
+  color:#000;
+  padding:12px 26px;
+  border-radius:30px;
+  text-decoration:none;
+  font-size:14px;
+}
+
+/* ================= ORNAMEN ================= */
+:root{
+  --ornament-main: 100px;
+  --ornament-side: 120px;
+  --ornament-top: 170px;
+}
+
+.ornament{
+  position:absolute;
+  pointer-events:none;
+  z-index:5;
+  opacity:0;
+  animation:fadeIn 1s ease forwards, sway 5s ease-in-out infinite;
+  animation-delay:1.6s;
+}
+
+.o1{
+  width:var(--ornament-main);
+  right:-40px;
+  bottom:-70px;
+}
+
+.o2{
+  width:var(--ornament-side);
+  left:290px;
+  bottom:-10px;
+  animation-name:fadeIn, swaySoft;
+}
+
+.o3{
+  width:var(--ornament-top);
+  right:40px;
+  bottom:-10px;
+  animation-name:fadeIn, swaySlow;
+}
+
+/* ================= ANIMASI ================= */
+@keyframes fadeScale{
+  from{opacity:0; transform:scale(.94);}
+  to{opacity:1; transform:scale(1);}
+}
+
+@keyframes slideUp{
+  from{opacity:0; transform:translateY(24px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+@keyframes fadeIn{
+  from{opacity:0;}
+  to{opacity:1;}
+}
+
+@keyframes sway{
+  0%,100%{ transform:rotate(-1.5deg);}
+  50%{ transform:rotate(1.5deg);}
+}
+
+@keyframes swaySoft{
+  0%,100%{ transform:rotate(1deg);}
+  50%{ transform:rotate(-1deg);}
+}
+
+@keyframes swaySlow{
+  0%,100%{ transform:rotate(0);}
+  50%{ transform:rotate(2deg);}
+  
+}
+
+
+</style>
+</head>
+
+<body>
+
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- ================= HALAMAN 1 ================= -->
+<section class="hero" id="cover">
+  <div class="content">
+    <small>THE WEDDING OF</small>
+    <h1>Latifah & Erfin</h1>
+    <p>Dear,<br><br>Acaraya Adibrata</p>
+    <a href="#" class="btn" id="openInvite">
+      <i class="fa-regular fa-envelope-open"></i>
+      <span>Buka Undangan</span>
+    </a>
+  </div>
+</section>
+
+<!-- ================= HALAMAN 2 ================= -->
+<section class="invitation" id="invitation">
+
+  <img src="couple-2.png" class="bg-photo">
+
+  <!-- SNOW -->
+  <div class="snow-wrap">
+    <div class="snow" style="left:5%; animation-duration:6s;"></div>
+    <div class="snow" style="left:15%; animation-duration:7.5s;"></div>
+    <div class="snow" style="left:25%; animation-duration:6.8s;"></div>
+    <div class="snow" style="left:40%; animation-duration:8s;"></div>
+    <div class="snow" style="left:55%; animation-duration:6.3s;"></div>
+    <div class="snow" style="left:70%; animation-duration:7.2s;"></div>
+    <div class="snow" style="left:85%; animation-duration:8.5s;"></div>
+  </div>
+
+  <div class="gradient"></div>
+
+  <div class="border-bottom">
+    <img src="border-bawah.png">
+  </div>
+
+  <div class="content-box">
+    <small>The Wedding Of</small>
+    <h1>Latifah & Erfin</h1>
+    <p>We invite you to celebrate our wedding</p>
+    <div class="date">Sabtu, 20 Desember 2025</div>
+    <a href="#" class="btn-save">Save The Date</a>
+  </div>
+
+  <img src="ornament-1.png" class="ornament o1">
+  <img src="ornament-3.png" class="ornament o3">
+  <img src="ornament-2.png" class="ornament o2">
+
+</section>
+
+<script>
+const btn = document.getElementById('openInvite');
+const music = document.getElementById('bgMusic');
+const cover = document.getElementById('cover');
+const invitation = document.getElementById('invitation');
+
+btn.addEventListener('click', e=>{
+  e.preventDefault();
+  music.play();
+  cover.style.opacity='0';
+  setTimeout(()=>{
+    cover.style.display='none';
+    invitation.classList.add('show');
+  },800);
+});
+</script>
+
+</body>
+</html>

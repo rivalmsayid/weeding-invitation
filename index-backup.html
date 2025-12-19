@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wedding Invitation</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: 'Georgia', serif;
+}
+
+body{
+  background:#eaeaea;
+  display:flex;
+  justify-content:center;
+}
+
+/* WRAPPER */
+.wrapper{
+  width:100%;
+  max-width:420px;
+  min-height:100vh;
+  position:relative;
+  overflow:hidden;
+}
+
+/* ================= COVER (HALAMAN PERTAMA) ================= */
+.cover{
+  position:absolute;
+  inset:0;
+  background:url('cover.jpg') center / cover no-repeat;
+  display:flex;
+  align-items:flex-end;
+}
+
+/* overlay cover */
+.cover::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    to top,
+    rgba(0,0,0,.8),
+    rgba(0,0,0,.4),
+    rgba(0,0,0,0)
+  );
+}
+
+.cover-content{
+  position:relative;
+  z-index:2;
+  width:100%;
+  padding:32px 24px 48px;
+  color:#fff;
+  text-align:center;
+}
+
+.cover-content .small{
+  font-size:12px;
+  letter-spacing:1px;
+  opacity:.85;
+}
+
+.cover-content h1{
+  font-size:26px;
+  margin:10px 0;
+}
+
+.cover-content .guest{
+  font-size:14px;
+  margin-top:6px;
+}
+
+.open-btn{
+  margin-top:18px;
+  padding:12px 26px;
+  border:none;
+  border-radius:26px;
+  background:#fff;
+  color:#333;
+  font-size:14px;
+  cursor:pointer;
+}
+
+/* ================= HALAMAN UTAMA ================= */
+.main{
+  display:none;
+  background:#414141;
+  min-height:100vh;
+}
+
+/* hero */
+.hero{
+  position: relative;
+  height: 100vh;
+  background: url('hero.jpg') center 20% / cover no-repeat;
+}
+
+
+/* konten */
+.content{
+  position: relative;
+  z-index: 2;
+
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding-top: 45vh;   /* ⬅️ INI KUNCI NAIKIN TEKS */
+  padding-left: 24px;
+  padding-right: 24px;
+
+  text-align: center;
+  color: #fff;
+}
+
+
+.title-small{
+  font-size:13px;
+  opacity:.8;
+}
+
+.names{
+  font-size:28px;
+  margin:6px 0;
+}
+
+.subtitle{
+  font-size:13px;
+  opacity:.85;
+}
+
+.date{
+  font-size:13px;
+  margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+  <!-- HALAMAN COVER -->
+  <section class="cover" id="cover">
+    <div class="cover-content">
+      <div class="small">THE WEDDING OF</div>
+      <h1>Latifah & Erfin</h1>
+      <div class="guest">
+        Dear,<br>
+        <strong>Acarya Adibrata</strong>
+      </div>
+      <button class="open-btn" onclick="openInvitation()">
+        Buka Undangan
+      </button>
+    </div>
+  </section>
+
+  <!-- HALAMAN UTAMA -->
+  <section class="hero">
+  <div class="hero-bg"></div>
+
+  <!-- GRADIENT PNG -->
+  <img src="gradient.png" class="gradient-layer" alt="">
+
+  <!-- TEXT CONTENT -->
+  <div class="content">
+    <small class="label">THE WEDDING OF</small>
+    <h1>Latifah & Erfin</h1>
+    <p class="dear">Dear,</p>
+    <p class="guest">Acarya Adibrata</p>
+
+    <button class="btn">
+      <span>✉</span> Buka Undangan
+    </button>
+  </div>
+</section>
+
+
+</div>
+
+<!-- MUSIC -->
+<audio id="music" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function openInvitation(){
+  document.getElementById('cover').style.display = 'none';
+  document.getElementById('main').style.display = 'block';
+  document.getElementById('music').play();
+}
+</script>
+
+</body>
+</html>
